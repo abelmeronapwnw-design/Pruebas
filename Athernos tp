@@ -737,6 +737,7 @@ local function disableNoclip()
 end
 
 print("[PARTE 2/3] Funciones de prompts, invisibilidad, teletransportes, flotar y noclip cargadas.")--// TP ABEL - PARTE 3/3: AUTO FARM (CORREGIDO: SOLO PROMPTS VISIBLES, COOLDOWN 5s)
+--// TP ABEL - PARTE 3/3: AUTO FARM (CORREGIDO: ESPERA 1s ANTES DE PROMPTS)
 local autoFarmActive = false
 local autoFarmLoopTask = nil
 local originalSellState = false
@@ -825,7 +826,9 @@ local function startAutoFarm()
             spam(clear, 20, 0.1)          -- invisible
             setInvisible(false)            -- visible
             spam(clear, 12, 0.1)          -- visible
-            task.wait(0.3)                -- dar tiempo a que aparezcan prompts
+            
+            -- *** ESPERA 1 SEGUNDO PARA QUE EL PROMPT APAREZCA ***
+            task.wait(1)                  -- <--- NUEVA ESPERA
 
             -- Activar Laundry Dirty Money (solo si visible y cooldown)
             local now = tick()
@@ -844,9 +847,11 @@ local function startAutoFarm()
 
             -- ========== PROCESO SELL ==========
             spam(sell, 20, 0.1)           -- invisible
-            setInvisible(false)            -- visible (ya lo estamos, pero por si acaso)
+            setInvisible(false)            -- visible
             spam(sell, 14, 0.1)           -- visible
-            task.wait(0.3)
+            
+            -- *** ESPERA 1 SEGUNDO PARA QUE EL PROMPT APAREZCA ***
+            task.wait(1)                  -- <--- NUEVA ESPERA
 
             -- Activar Sell All Smuggle (solo si visible y cooldown)
             now = tick()
@@ -1017,4 +1022,4 @@ CreateToggle(visualPage, "FPS Boost", UDim2.new(0.05,0,0.05,0), function(v)
     end
 end)
 
-print("✅ TP Abel - Auto Farm definitivo cargado (con invisible, flotar, noclip, spams y prompts con cooldown solo visibles).")
+print("✅ TP Abel - Auto Farm definitivo cargado (con espera de 1s antes de prompts).")

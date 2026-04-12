@@ -723,7 +723,7 @@ local autoFarmToggleFrame = nil
 -- Cooldowns para Laundry y Sell (5 segundos cada uno)
 local lastLaundryAuto = 0
 local lastSellAuto = 0
-local promptCooldown = 3
+local promptCooldown = 0
 
 -- Función que ejecuta el bucle del Auto Farm
 local function startAutoFarm()

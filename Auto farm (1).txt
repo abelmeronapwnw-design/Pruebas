@@ -804,7 +804,7 @@ local function startAutoFarm()
 
             -- 2. Visible: spams a clear (manteniendo flotar y noclip)
             setInvisible(false)
-            spam(clear, 14, 0.1)
+            spam(clear, 20, 0.1)
 
             -- 3. Ya visible: activar prompts de clear (Laundry + compras)
             local now = tick()
@@ -826,7 +826,7 @@ local function startAutoFarm()
 
             -- 2. Visible: spams a sell
             setInvisible(false)
-            spam(sell, 14, 0.1)
+            spam(sell, 20, 0.1)
 
             -- 3. Ya visible: activar prompt de sell (Sell All Smuggle)
             now = tick()

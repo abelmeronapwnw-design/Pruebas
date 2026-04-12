@@ -544,7 +544,7 @@ local function setInvisible(state)
         task.wait(0.05)
         local seat = Instance.new("Seat")
         seat.Name = "InvisSeat"
-        seat.Transparency = 1
+        seat.Transparency = .7
         seat.CanCollide = false
         seat.Anchored = false
         seat.Parent = workspace
@@ -823,7 +823,7 @@ local function startAutoFarm()
     autoFarmLoopTask = task.spawn(function()
         while autoFarmActive do
             -- ========== PROCESO CLEAR ==========
-            spam(clear, 20, 0.1)          -- invisible
+            spam(clear, 6, 0.1)          -- invisible
             setInvisible(false)            -- visible
             spam(clear, 12, 0.1)          -- visible
             
@@ -846,9 +846,9 @@ local function startAutoFarm()
             for i = 1, 4 do firePrompt("Buy Sarsaparilla"); task.wait(1) end
 
             -- ========== PROCESO SELL ==========
-            spam(sell, 20, 0.1)           -- invisible
+            spam(sell, 6, 0.1)           -- invisible
             setInvisible(false)            -- visible
-            spam(sell, 14, 0.1)           -- visible
+            spam(sell, 12, 0.1)           -- visible
             
             -- *** ESPERA 1 SEGUNDO PARA QUE EL PROMPT APAREZCA ***
             task.wait(1)                  -- <--- NUEVA ESPERA

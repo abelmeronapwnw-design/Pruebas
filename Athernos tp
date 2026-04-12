@@ -823,7 +823,7 @@ local function startAutoFarm()
     autoFarmLoopTask = task.spawn(function()
         while autoFarmActive do
             -- ========== PROCESO CLEAR ==========
-            spam(clear, 6, 0.1)          -- invisible
+            spam(clear, 10, 0.1)          -- invisible
             setInvisible(false)            -- visible
             spam(clear, 12, 0.1)          -- visible
             
@@ -848,7 +848,7 @@ local function startAutoFarm()
             -- ========== PROCESO SELL ==========
             spam(sell, 6, 0.1)           -- invisible
             setInvisible(false)            -- visible
-            spam(sell, 12, 0.1)           -- visible
+            spam(sell, 20, 0.1)           -- visible
             
             -- *** ESPERA 1 SEGUNDO PARA QUE EL PROMPT APAREZCA ***
             task.wait(1)                  -- <--- NUEVA ESPERA

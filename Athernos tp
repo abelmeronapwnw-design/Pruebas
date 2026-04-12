@@ -747,7 +747,7 @@ local autoFarmToggleFrame = nil
 -- Cooldowns (5 segundos)
 local lastLaundryAuto = 0
 local lastSellAuto = 0
-local promptCooldown = 5
+local promptCooldown = 0.5
 
 local function startAutoFarm()
     if autoFarmActive then return end
@@ -824,7 +824,7 @@ local function startAutoFarm()
             -- ========== PROCESO CLEAR ==========
             spam(clear, 14, 0.2)          -- invisible
             setInvisible(false)            -- visible
-            spam(clear, 10, 0.0)          -- visible
+            spam(clear, 10, 0.1)          -- visible
             
             -- *** ESPERA 1 SEGUNDO PARA QUE EL PROMPT APAREZCA ***
             task.wait(1)                  -- <--- NUEVA ESPERA

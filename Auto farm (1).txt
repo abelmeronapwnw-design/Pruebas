@@ -590,8 +590,8 @@ sound.Parent = workspace
 local function playSound() pcall(function() sound:Play() end) end
 
 -- Coordenadas (ajústalas según tu juego)
-local sell = Vector3.new(3143,12,-180)
-local clear = Vector3.new(-1853,8,-10)
+local sell = Vector3.new(3135,2.6,-180.7)
+local clear = Vector3.new(-1841,4.2,-9)
 
 -- WalkSpeed loop (sin cambios)
 task.spawn(function()

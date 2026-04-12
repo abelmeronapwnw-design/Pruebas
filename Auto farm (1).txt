@@ -1,4 +1,4 @@
---// TP ABEL - PARTE 1/3: GUI, NOTIFICACIONES, TOGGLES (MODIFICADO: se eliminó Auto Prompt)
+--// TP ABEL - PARTE 1/3: GUI, NOTIFICACIONES, TOGGLES (CORREGIDO)
 local Players = game:GetService("Players")
 local UIS = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -10,7 +10,7 @@ local Lighting = game:GetService("Lighting")
 local Player = Players.LocalPlayer
 
 -- Variables globales
-_G.AutoFarm = false          -- Cambiado de InstaFarm a AutoFarm
+_G.AutoFarm = false
 _G.AutoGrab = false
 _G.AutoSell = false
 _G.AutoLaundry = false
@@ -18,9 +18,9 @@ _G.WalkSpeedValue = 24
 _G.DynamicIslandEnabled = false
 _G.FPSBoost = false
 _G.invisActive = false
-_G.AutoFarmRunning = false   -- Renombrado (antes InstaFarmRunning)
+_G.AutoFarmRunning = false
 
--- Splash de carga (igual)
+-- Splash de carga
 local function showSplash()
     local splashGui = Instance.new("ScreenGui", CoreGui)
     splashGui.Name = "SplashTPAbel"
@@ -64,7 +64,7 @@ local function showSplash()
     splashGui:Destroy()
 end
 
--- GUI principal (igual)
+-- GUI principal
 local ScreenGui = Instance.new("ScreenGui", CoreGui)
 ScreenGui.Name = "UltraInstinctUI"
 ScreenGui.ResetOnSpawn = false
@@ -98,7 +98,7 @@ RunService.RenderStepped:Connect(function()
     Title.TextColor3 = Color3.fromHSV(titleHue, 1, 1)
 end)
 
--- Arrastre (igual)
+-- Arrastre
 local dragging = false
 local dragStart, startPos
 MainFrame.InputBegan:Connect(function(input)
@@ -120,7 +120,7 @@ UIS.InputEnded:Connect(function(input)
     end
 end)
 
--- Botón flotante MENU (igual)
+-- Botón flotante MENU
 local ToggleBtn = Instance.new("TextButton", ScreenGui)
 ToggleBtn.Size = UDim2.new(0, 120, 0, 40)
 ToggleBtn.Position = UDim2.new(0.05, 0, 0.1, 0)
@@ -169,7 +169,7 @@ ToggleBtn.MouseButton1Click:Connect(function()
     if menuOpen then OpenMenu() else CloseMenu() end
 end)
 
--- Tabs (igual)
+-- Tabs
 local Tabs = Instance.new("Frame", MainFrame)
 Tabs.Size = UDim2.new(1,0,0,40)
 Tabs.Position = UDim2.new(0,0,0,60)
@@ -226,7 +226,7 @@ MainTab.MouseButton1Click:Connect(function() Switch("Main"); MoveLine(UDim2.new(
 MiscTab.MouseButton1Click:Connect(function() Switch("Misc"); MoveLine(UDim2.new(0.33,0,0,0)) end)
 VisualTab.MouseButton1Click:Connect(function() Switch("Visual"); MoveLine(UDim2.new(0.66,0,0,0)) end)
 
--- Notificaciones (igual)
+-- Notificaciones
 local notifContainer = Instance.new("Frame", ScreenGui)
 notifContainer.Size = UDim2.new(0, 260, 0, 0)
 notifContainer.Position = UDim2.new(1, -270, 0.05, 0)
@@ -282,7 +282,7 @@ local function showNotification(msg, duration, isTimer)
     notif:Destroy()
 end
 
--- Dynamic Island (igual)
+-- Dynamic Island
 local island = Instance.new("Frame", ScreenGui)
 island.Size = UDim2.new(0, 0, 0, 0)
 island.Position = UDim2.new(0.5, 0, 0.02, 0)
@@ -483,7 +483,7 @@ wsBox.FocusLost:Connect(function()
     if val then _G.WalkSpeedValue = val end
 end)
 
--- Toggles en Misc (se eliminó Auto Prompt)
+-- Toggles en Misc
 CreateToggle(miscPage, "Auto Grab Materiales", UDim2.new(0.05,0,0.05,0), function(v) _G.AutoGrab = v end)
 CreateToggle(miscPage, "Auto Sell", UDim2.new(0.05,0,0.18,0), function(v) _G.AutoSell = v end)
 CreateToggle(miscPage, "Auto Laundry", UDim2.new(0.05,0,0.31,0), function(v) _G.AutoLaundry = v end)
@@ -493,7 +493,7 @@ CreateToggle(miscPage, "Dynamic Island", UDim2.new(0.05,0,0.44,0), function(v)
 end)
 
 showSplash()
-print("[PARTE 1/3] GUI cargada correctamente.")--// TP ABEL - PARTE 2/3: PROMPTS, INVISIBILIDAD, TELEPORTES, FLOTAR, NOCLIP, Y VARIABLES
+print("[PARTE 1/3] GUI cargada correctamente.")--// TP ABEL - PARTE 2/3: PROMPTS, INVISIBILIDAD, TELEPORTES, FLOTAR, NOCLIP
 local function firePrompt(name)
     for _, v in pairs(workspace:GetDescendants()) do
         if v:IsA("ProximityPrompt") and v.ActionText == name then
@@ -529,7 +529,7 @@ local function setCharacterTransparency(trans)
     end
 end
 
--- Invisibilidad (sin cambios, solo actualiza _G.invisActive)
+-- Invisibilidad (actualiza _G.invisActive)
 local function setInvisible(state)
     local char = Player.Character
     if not char then return false end
@@ -582,18 +582,18 @@ local function spam(v, n, interval)
     end
 end
 
--- Sonido (sin cambios)
+-- Sonido
 local sound = Instance.new("Sound")
 sound.SoundId = "rbxassetid://9120371786"
 sound.Volume = 0.4
 sound.Parent = workspace
 local function playSound() pcall(function() sound:Play() end) end
 
--- Coordenadas (ajústalas según tu juego)
-local sell = Vector3.new(3135,2.6,-180.7)
-local clear = Vector3.new(-1841,4.2,-9)
+-- Coordenadas actualizadas
+local sell = Vector3.new(3135, 2.6, -180.7)
+local clear = Vector3.new(-1841, 4.2, -9)
 
--- WalkSpeed loop (sin cambios)
+-- WalkSpeed loop
 task.spawn(function()
     while true do
         local char = Player.Character
@@ -604,7 +604,7 @@ task.spawn(function()
     end
 end)
 
--- Auto Sell y Auto Laundry (independientes, sin cambios)
+-- Auto Sell y Auto Laundry (independientes)
 task.spawn(function()
     local lastSellTime = 0
     local lastLaundryTime = 0
@@ -626,7 +626,7 @@ task.spawn(function()
     end
 end)
 
--- Auto Grab Materiales (ráfaga de compras, respeta _G.AutoFarmRunning)
+-- Auto Grab Materiales (ráfaga)
 local function autoGrabRafaga()
     for i = 1, 3 do firePrompt("Buy Fake Watch"); task.wait(1) end
     task.wait(1)
@@ -658,11 +658,10 @@ task.spawn(function()
     end
 end)
 
--- ========== FUNCIONES DE FLOTAR Y NOCLIP (nuevas) ==========
+-- Funciones de flotar y noclip
 local floatBV = nil
 local noclipActive = false
 
--- Flotar (BodyVelocity velocidad 0 + PlatformStand)
 local function enableFloat()
     local char = Player.Character
     if not char then return end
@@ -691,7 +690,6 @@ local function disableFloat()
     end
 end
 
--- Noclip simple (solo traspasar paredes, sin movimiento)
 local function enableNoclip()
     local char = Player.Character
     if not char then return end
@@ -738,10 +736,9 @@ local function startAutoFarm()
     originalLaundryState = _G.AutoLaundry
     originalGrabState = _G.AutoGrab
 
-    -- Desactivar AutoSell, AutoLaundry y AutoGrab temporalmente (para que no interfieran)
+    -- Desactivar AutoSell, AutoLaundry y AutoGrab temporalmente
     if _G.AutoSell then
         _G.AutoSell = false
-        -- Actualizar toggle visual
         for _, v in pairs(miscPage:GetDescendants()) do
             if v:IsA("Frame") and v.Parent and v.Parent:IsA("Frame") then
                 local holder = v.Parent
@@ -801,47 +798,48 @@ local function startAutoFarm()
     -- Bucle infinito (se ejecutará mientras autoFarmActive sea true)
     autoFarmLoopTask = task.spawn(function()
         while autoFarmActive do
-    -- ========== PROCESO PARA CLEAR ==========
-    -- 1. Invisible: spams a clear
-    spam(clear, 10, 0.1)
+            -- ========== PROCESO PARA CLEAR ==========
+            -- 1. Invisible: spams a clear
+            spam(clear, 10, 0.1)
 
-    -- 2. Visible: spams a clear (manteniendo flotar y noclip)
-    setInvisible(false)
-    spam(clear, 10, 0.1)
+            -- 2. Visible: spams a clear (manteniendo flotar y noclip)
+            setInvisible(false)
+            spam(clear, 10, 0.1)
 
-    -- 3. Ya visible: activar prompts de clear (Laundry + compras)
-    --    (solo si ha pasado el cooldown de 5s para Laundry)
-    local now = tick()
-    if now - lastLaundryAuto >= promptCooldown then
-        if firePrompt("Laundry Dirty Money") then
-            lastLaundryAuto = now
+            -- 3. Ya visible: activar prompts de clear (Laundry + compras)
+            local now = tick()
+            if now - lastLaundryAuto >= promptCooldown then
+                if firePrompt("Laundry Dirty Money") then
+                    lastLaundryAuto = now
+                end
+            end
+            -- Ráfaga de compras (siempre se ejecuta, sin cooldown)
+            for i = 1, 3 do firePrompt("Buy Fake Watch"); task.wait(1) end
+            task.wait(1)
+            for i = 1, 3 do firePrompt("Buy Fake Designer Bag"); task.wait(1) end
+            task.wait(1)
+            for i = 1, 4 do firePrompt("Buy Sarsaparilla"); task.wait(1) end
+
+            -- ========== PROCESO PARA SELL ==========
+            -- 1. Invisible: spams a sell
+            spam(sell, 10, 0.1)
+
+            -- 2. Visible: spams a sell
+            setInvisible(false)
+            spam(sell, 10, 0.1)
+
+            -- 3. Ya visible: activar prompt de sell (Sell All Smuggle)
+            now = tick()
+            if now - lastSellAuto >= promptCooldown then
+                if firePrompt("Sell All Smuggle") then
+                    lastSellAuto = now
+                end
+            end
+
+            -- Pequeña pausa antes de repetir el ciclo
+            task.wait(0.5)
         end
-    end
-    -- Ráfaga de compras (siempre se ejecuta, sin cooldown)
-    for i = 1, 3 do firePrompt("Buy Fake Watch"); task.wait(1) end
-    task.wait(1)
-    for i = 1, 3 do firePrompt("Buy Fake Designer Bag"); task.wait(1) end
-    task.wait(1)
-    for i = 1, 4 do firePrompt("Buy Sarsaparilla"); task.wait(1) end
-
-    -- ========== PROCESO PARA SELL ==========
-    -- 1. Invisible: spams a sell
-    spam(sell, 10, 0.1)
-
-    -- 2. Visible: spams a sell
-    setInvisible(false)
-    spam(sell, 10, 0.1)
-
-    -- 3. Ya visible: activar prompt de sell (Sell All Smuggle)
-    now = tick()
-    if now - lastSellAuto >= promptCooldown then
-        if firePrompt("Sell All Smuggle") then
-            lastSellAuto = now
-        end
-    end
-
-    -- Pequeña pausa antes de repetir el ciclo (opcional)
-    task.wait(0.5)
+    end)
 end
 
 -- Función para detener el Auto Farm y restaurar todo
@@ -948,7 +946,7 @@ end
 
 fixMainToggles()
 
--- Toggle "Auto Farm" adicional (por si acaso, con el nuevo nombre)
+-- Toggle "Auto Farm" adicional (por si acaso)
 local autoFarmToggle = CreateToggle(mainPage, "Auto Farm", UDim2.new(0.05,0,0.30,0), function(v)
     _G.AutoFarm = v
     if v then
@@ -958,7 +956,7 @@ local autoFarmToggle = CreateToggle(mainPage, "Auto Farm", UDim2.new(0.05,0,0.30
     end
 end)
 
--- Imágenes decorativas (sin cambios)
+-- Imágenes decorativas
 local imgSize = 200
 local imgSpacing = 20
 local totalWidth = imgSize * 2 + imgSpacing
@@ -980,7 +978,7 @@ img2.ScaleType = Enum.ScaleType.Fit
 
 mainPage.CanvasSize = UDim2.new(0, 0, 0, 480)
 
--- FPS Boost (sin cambios)
+-- FPS Boost
 CreateToggle(visualPage, "FPS Boost", UDim2.new(0.05,0,0.05,0), function(v)
     _G.FPSBoost = v
     if _G.FPSBoost then

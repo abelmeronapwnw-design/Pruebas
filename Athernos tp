@@ -614,7 +614,7 @@ end)
 task.spawn(function()
     local lastSellTime = 0
     local lastLaundryTime = 0
-    local sellCooldown = 1
+    local sellCooldown = 2
     local laundryCooldown = 3
     while true do
         local now = tick()
@@ -736,7 +736,6 @@ local function disableNoclip()
     end
 end
 
-print("[PARTE 2/3] Funciones de prompts, invisibilidad, teletransportes, flotar y noclip cargadas.")--// TP ABEL - PARTE 3/3: AUTO FARM (CORREGIDO: SOLO PROMPTS VISIBLES, COOLDOWN 5s)
 --// TP ABEL - PARTE 3/3: AUTO FARM (CORREGIDO: ESPERA 1s ANTES DE PROMPTS)
 local autoFarmActive = false
 local autoFarmLoopTask = nil
@@ -823,9 +822,9 @@ local function startAutoFarm()
     autoFarmLoopTask = task.spawn(function()
         while autoFarmActive do
             -- ========== PROCESO CLEAR ==========
-            spam(clear, 10, 0.1)          -- invisible
+            spam(clear, 14, 0.2)          -- invisible
             setInvisible(false)            -- visible
-            spam(clear, 12, 0.1)          -- visible
+            spam(clear, 10, 0.1)          -- visible
             
             -- *** ESPERA 1 SEGUNDO PARA QUE EL PROMPT APAREZCA ***
             task.wait(1)                  -- <--- NUEVA ESPERA
@@ -846,9 +845,9 @@ local function startAutoFarm()
             for i = 1, 4 do firePrompt("Buy Sarsaparilla"); task.wait(1) end
 
             -- ========== PROCESO SELL ==========
-            spam(sell, 6, 0.1)           -- invisible
+            spam(sell, 14, 0.2)           -- invisible
             setInvisible(false)            -- visible
-            spam(sell, 20, 0.1)           -- visible
+            spam(sell, 15, 0.1)           -- visible
             
             -- *** ESPERA 1 SEGUNDO PARA QUE EL PROMPT APAREZCA ***
             task.wait(1)                  -- <--- NUEVA ESPERA

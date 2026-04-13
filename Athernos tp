@@ -807,6 +807,9 @@ local function startAutoFarm()
     end
 
     -- Notificación inicial y cuenta regresiva
+    
+-- Función para detener el Auto Farm y restaurar todo
+local func    -- Notificación inicial y cuenta regresiva
     showNotification("🔥 Auto Farm activado en 3 segundos...", 1)
     for i = 3, 1, -1 do
         showNotification(i .. "...", 1)
@@ -818,7 +821,7 @@ local function startAutoFarm()
     enableFloat()
     enableNoclip()
 
-    -- Bucle infinito (VERSIÓN CORREGIDA, SIN ERRORES)
+    -- Bucle infinito (CORREGIDO)
     autoFarmLoopTask = task.spawn(function()
         while autoFarmActive do
             -- ========== ASEGURAR INVISIBILIDAD AL INICIO DEL CICLO ==========
@@ -864,10 +867,7 @@ local function startAutoFarm()
             task.wait(0.5)   -- pequeña pausa antes de repetir
         end
     end)
-end
-
--- Función para detener el Auto Farm y restaurar todo
-local function stopAutoFarm()
+endtion stopAutoFarm()
     if not autoFarmActive then return end
     autoFarmActive = false
     _G.AutoFarmRunning = false

@@ -494,8 +494,7 @@ CreateToggle(miscPage, "Dynamic Island", UDim2.new(0.05,0,0.32,0), function(v)
 end, true)
 
 showSplash()
-print("[PARTE 1/3] GUI cargada correctamente.")
---// TP ABEL - PARTE 2/3: PROMPTS, INVISIBILIDAD, TELEPORTES, FLOTAR, NOCLIP
+print("[PARTE 1/3] GUI cargada correctamente.")--// TP ABEL - PARTE 2/3: PROMPTS, INVISIBILIDAD, TELEPORTES, FLOTAR, NOCLIP
 local function firePrompt(name)
     for _, v in pairs(workspace:GetDescendants()) do
         if v:IsA("ProximityPrompt") and v.ActionText == name then
@@ -541,7 +540,7 @@ local function setInvisible(state)
     if state and not _G.invisActive then
         setCharacterTransparency(invisTransparency)
         local savedPos = root.CFrame
-        char:MoveTo(root.Position + Vector3.new(-25.9, 84.0, 3537.6))
+        char:MoveTo(root.Position + Vector3.new(0, 20, 0))
         task.wait(0.05)
         local seat = Instance.new("Seat")
         seat.Name = "InvisSeat"
@@ -596,7 +595,7 @@ sound.Volume = 0.4
 sound.Parent = workspace
 local function playSound() pcall(function() sound:Play() end) end
 
--- Coordenadas actualizadas (nuevas)
+-- Coordenadas actualizadas
 local sell = Vector3.new(3507.4, 6.5, -736.9)
 local clear = Vector3.new(-1843.3, 24, -4.1)
 
@@ -1030,4 +1029,4 @@ CreateToggle(visualPage, "FPS Boost", UDim2.new(0.05,0,0.05,0), function(v)
     end
 end)
 
-print("✅ TP Abel - Auto Farm definitivo cargado (flotar se desactiva tras spams visibles).")w
+print("✅ TP Abel - Auto Farm definitivo cargado (flotar se desactiva tras spams visibles)."),

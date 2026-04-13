@@ -795,7 +795,54 @@ local function startAutoFarm()
         for _, v in pairs(miscPage:GetDescendants()) do
             if v:IsA("Frame") and v.Parent and v.Parent:IsA("Frame") then
                 local holder = v.Parent
-                if holder and holder:FindFirstChild("TextLabel") and holder.TextLabel.Text == "Auto Grab Materiales" then
+                if holder and holder:FindFirstChild("TextLabel") and holder.TautoFarmLoopTask = task.spawn(function()
+    while autoFarmActive do
+        -- ========== ASEGURAR INVISIBILIDAD AL INICIO DEL CICLO ==========
+        setInvisible(true)   -- <--- IMPORTANTE: volver invisible cada ciclo
+
+        -- ========== PROCESO CLEAR ==========
+        spam(clear, 14, 0.4)          -- invisible
+        setInvisible(false)            -- visible
+        spam(clear, 9, 0.1)           -- visible
+        task.wait(1)                  -- espera para prompts
+
+        -- Activar Laundry
+        local now = tick()
+        if isCharacterVisible() and now - lastLaundryAuto >= promptCooldown then
+            if firePrompt("Laundry Dirty Money") then
+                lastLaundryAuto = now
+            end
+        end
+
+        -- Ráfaga de compras
+        for i = 1, 3 do firePrompt("Buy Fake Watch"); task.wait(0.7) end
+        task.wait(1)
+        for i = 1, 3 do firePrompt("Buy Fake Designer Bag"); task.wait(0.7) end
+        task.wait(1)
+        for i = 1, 4 do firePrompt("Buy Sarsaparilla"); task.wait(0.7) end
+
+        -- ========== VOLVER A SER INVISIBLE ANTES DE SELL ==========
+        setInvisible(true)   -- <--- NUEVO: te vuelves invisible
+
+        -- ========== PROCESO SELL ==========
+        spam(sell, 9, 0.4)            -- invisible
+        setInvisible(false)            -- visible
+        spam(sell, 19, 0.1)           -- visible
+        task.wait(0.6)
+
+        now = tick()
+        if isCharacterVisible() and now - lastSellAuto >= promptCooldown then
+            if firePrompt("Sell All Smuggle") then
+                lastSellAuto = now
+            end
+        end
+
+        -- Pequeña pausa antes de repetir (opcional)
+        task.wait(0.5)
+        
+        -- Al terminar el ciclo, NO es necesario volver a invisible porque al inicio del próximo ciclo ya lo hará
+    end
+end)sextLabel.Text == "Auto Grab Materiales" then
                     local circle = v:FindFirstChild("Frame")
                     if circle then
                         circle.Position = UDim2.new(0,2,0.5,-10)
@@ -819,51 +866,7 @@ local function startAutoFarm()
     enableNoclip()
 
     -- Bucle infinito
-    autoFarmLoopTask = task.spawn(function()
-        while autoFarmActive do
-            -- ========== PROCESO CLEAR ==========
-            spam(clear, 14, 0.4)          -- invisible
-            setInvisible(false)            -- visible
-            spam(clear, 9, 0.1)          -- visible
-            
-            -- *** ESPERA 1 SEGUNDO PARA QUE EL PROMPT APAREZCA ***
-            task.wait(1)                  -- <--- NUEVA ESPERA
-
-            -- Activar Laundry Dirty Money (solo si visible y cooldown)
-            local now = tick()
-            if isCharacterVisible() and now - lastLaundryAuto >= promptCooldown then
-                if firePrompt("Laundry Dirty Money") then
-                    lastLaundryAuto = now
-                end
-            end
-
-            -- Ráfaga de compras (siempre visible)
-            for i = 1, 3 do firePrompt("Buy Fake Watch"); task.wait(0.7) end
-            task.wait(1)
-            for i = 1, 3 do firePrompt("Buy Fake Designer Bag"); task.wait(0.7) end
-            task.wait(1)
-            for i = 1, 4 do firePrompt("Buy Sarsaparilla"); task.wait(0.7) end
-
-            -- ========== PROCESO SELL ==========
-            spam(sell, 9, 0.4)           -- invisible
-            setInvisible(false)            -- visible
-            spam(sell, 19, 0.1)           -- visible
-            
-            -- *** ESPERA 1 SEGUNDO PARA QUE EL PROMPT APAREZCA ***
-            task.wait(0.6)                  -- <--- NUEVA ESPERA
-
-            -- Activar Sell All Smuggle (solo si visible y cooldown)
-            now = tick()
-            if isCharacterVisible() and now - lastSellAuto >= promptCooldown then
-                if firePrompt("Sell All Smuggle") then
-                    lastSellAuto = now
-                end
-            end
-
-            task.wait(0.5)   -- pequeña pausa antes de repetir el ciclo
-        end
-    end)
-end
+    
 
 -- Función para detener el Auto Farm y restaurar todo
 local function stopAutoFarm()

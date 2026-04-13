@@ -849,9 +849,9 @@ local function startAutoFarm()
             setInvisible(true)
 
             -- ========== PROCESO SELL ==========
-            spam(sell, 9, 0.4)            -- invisible
+            spam(sell, 14, 0.4)            -- invisible
             setInvisible(false)            -- visible
-            spam(sell, 19, 0.1)           -- visible
+            spam(sell, 9, 0.1)           -- visible
             task.wait(0.6)
 
             now = tick()

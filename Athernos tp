@@ -36,13 +36,13 @@ local function showSplash()
     local image = Instance.new("ImageLabel", container)
     image.Size = UDim2.new(1,0,0.8,0)
     image.BackgroundTransparency = 1
-    image.Image = "rbxassetid://87964594320758"
+    image.Image = "rbxassetid://113151300676700"
     image.ScaleType = Enum.ScaleType.Fit
     local text = Instance.new("TextLabel", container)
     text.Size = UDim2.new(1,0,0.15,0)
     text.Position = UDim2.new(0,0,0.82,0)
     text.BackgroundTransparency = 1
-    text.Text = "Cargando ELVERGUEABUELITAS3000"
+    text.Text = "Cargando NOVX"
     text.TextScaled = true
     text.Font = Enum.Font.GothamBold
     local hue = 0
@@ -825,7 +825,7 @@ local function startAutoFarm()
             setInvisible(true)
 
             -- ========== PROCESO CLEAR ==========
-            spam(clear, 14, 0.4)          -- invisible
+            spam(clear, 3, 1)          -- invisible
             setInvisible(false)            -- visible
             spam(clear, 9, 0.1)           -- visible
             task.wait(1)                  -- espera para prompts
@@ -849,7 +849,7 @@ local function startAutoFarm()
             setInvisible(true)
 
             -- ========== PROCESO SELL ==========
-            spam(sell, 11, 0.4)            -- invisible
+            spam(sell, 3, 1)            -- invisible
             setInvisible(false)            -- visible
             spam(sell, 9, 0.1)           -- visible
             task.wait(0.6)

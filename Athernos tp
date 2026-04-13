@@ -736,7 +736,7 @@ local function disableNoclip()
     end
 end
 
---// TP ABEL - PARTE 3/3: AUTO FARM (CORREGIDO, SIN ERRORES DE SINTAXIS)
+--// TP ABEL - PARTE 3/3: AUTO FARM (CORREGIDO, SIN ROMPER INTERFAZ)
 local autoFarmActive = false
 local autoFarmLoopTask = nil
 local originalSellState = false
@@ -807,9 +807,6 @@ local function startAutoFarm()
     end
 
     -- Notificación inicial y cuenta regresiva
-    
--- Función para detener el Auto Farm y restaurar todo
-local func    -- Notificación inicial y cuenta regresiva
     showNotification("🔥 Auto Farm activado en 3 segundos...", 1)
     for i = 3, 1, -1 do
         showNotification(i .. "...", 1)
@@ -821,7 +818,7 @@ local func    -- Notificación inicial y cuenta regresiva
     enableFloat()
     enableNoclip()
 
-    -- Bucle infinito (CORREGIDO)
+    -- Bucle infinito (corregido)
     autoFarmLoopTask = task.spawn(function()
         while autoFarmActive do
             -- ========== ASEGURAR INVISIBILIDAD AL INICIO DEL CICLO ==========
@@ -867,7 +864,10 @@ local func    -- Notificación inicial y cuenta regresiva
             task.wait(0.5)   -- pequeña pausa antes de repetir
         end
     end)
-endtion stopAutoFarm()
+end
+
+-- Función para detener el Auto Farm y restaurar todo
+local function stopAutoFarm()
     if not autoFarmActive then return end
     autoFarmActive = false
     _G.AutoFarmRunning = false
@@ -932,7 +932,7 @@ endtion stopAutoFarm()
     showNotification("❌ Auto Farm desactivado", 1)
 end
 
--- Vincular el toggle "Auto Farm" en la pestaña Main
+-- Vincular el toggle "Auto Farm" en la pestaña Main (corregida posición)
 local function fixMainToggles()
     for _, v in pairs(mainPage:GetDescendants()) do
         if v:IsA("Frame") and v.Parent and v.Parent:IsA("Frame") then
@@ -970,7 +970,7 @@ end
 
 fixMainToggles()
 
--- Toggle "Auto Farm" adicional
+-- Toggle "Auto Farm" adicional (con posición corregida)
 local autoFarmToggle = CreateToggle(mainPage, "Auto Farm", UDim2.new(0.05,0,0.05,0), function(v)
     _G.AutoFarm = v
     if v then
@@ -980,7 +980,7 @@ local autoFarmToggle = CreateToggle(mainPage, "Auto Farm", UDim2.new(0.05,0,0.05
     end
 end)
 
--- Imágenes decorativas
+-- Imágenes decorativas (ajustadas a 150x150 y posición Y = 160)
 local imgSize = 150
 local imgSpacing = 20
 local totalWidth = imgSize * 2 + imgSpacing
@@ -999,6 +999,8 @@ img2.Position = UDim2.new(0, startX + imgSize + imgSpacing, 0, 160)
 img2.BackgroundTransparency = 1
 img2.Image = "rbxassetid://92537293278112"
 img2.ScaleType = Enum.ScaleType.Fit
+
+-- No fijamos CanvasSize, se ajustará automáticamente
 
 -- FPS Boost
 CreateToggle(visualPage, "FPS Boost", UDim2.new(0.05,0,0.05,0), function(v)

@@ -596,7 +596,7 @@ sound.Parent = workspace
 local function playSound() pcall(function() sound:Play() end) end
 
 -- Coordenadas actualizadas (nuevas)
-local sell = Vector3.new(3136.2, 12, -182.1)
+local sell = Vector3.new(3507.4, 6.5, -736.9)
 local clear = Vector3.new(-1843.3, 24, -4.1)
 
 -- WalkSpeed loop

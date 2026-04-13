@@ -747,7 +747,7 @@ local autoFarmToggleFrame = nil
 -- Cooldowns (5 segundos)
 local lastLaundryAuto = 0
 local lastSellAuto = 0
-local promptCooldown = 5
+local promptCooldown = 0.5
 
 local function startAutoFarm()
     if autoFarmActive then return end

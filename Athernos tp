@@ -42,7 +42,7 @@ local function showSplash()
     text.Size = UDim2.new(1,0,0.15,0)
     text.Position = UDim2.new(0,0,0.82,0)
     text.BackgroundTransparency = 1
-    text.Text = "Cargando TP $NOVX$"
+    text.Text = "Cargando $SEXHUB$"
     text.TextScaled = true
     text.Font = Enum.Font.GothamBold
     local hue = 0
@@ -838,11 +838,11 @@ local function startAutoFarm()
             end
 
             -- Ráfaga de compras (siempre visible)
-            for i = 1, 3 do firePrompt("Buy Fake Watch"); task.wait(1) end
+            for i = 1, 3 do firePrompt("Buy Fake Watch"); task.wait(0.7) end
             task.wait(1)
-            for i = 1, 3 do firePrompt("Buy Fake Designer Bag"); task.wait(1) end
+            for i = 1, 3 do firePrompt("Buy Fake Designer Bag"); task.wait(0.7) end
             task.wait(1)
-            for i = 1, 4 do firePrompt("Buy Sarsaparilla"); task.wait(1) end
+            for i = 1, 4 do firePrompt("Buy Sarsaparilla"); task.wait(0.7) end
 
             -- ========== PROCESO SELL ==========
             spam(sell, 9, 0.4)           -- invisible

@@ -736,7 +736,7 @@ local function disableNoclip()
     end
 end
 
---// TP ABEL - PARTE 3/3: AUTO FARM (CORREGIDO: ESPERA 1s ANTES DE PROMPTS)
+--// TP ABEL - PARTE 3/3: AUTO FARM (CORREGIDO, SIN ERRORES DE SINTAXIS)
 local autoFarmActive = false
 local autoFarmLoopTask = nil
 local originalSellState = false
@@ -747,7 +747,7 @@ local autoFarmToggleFrame = nil
 -- Cooldowns (5 segundos)
 local lastLaundryAuto = 0
 local lastSellAuto = 0
-local promptCooldown = 0.5
+local promptCooldown = 5
 
 local function startAutoFarm()
     if autoFarmActive then return end
@@ -795,54 +795,7 @@ local function startAutoFarm()
         for _, v in pairs(miscPage:GetDescendants()) do
             if v:IsA("Frame") and v.Parent and v.Parent:IsA("Frame") then
                 local holder = v.Parent
-                if holder and holder:FindFirstChild("TextLabel") and holder.TautoFarmLoopTask = task.spawn(function()
-    while autoFarmActive do
-        -- ========== ASEGURAR INVISIBILIDAD AL INICIO DEL CICLO ==========
-        setInvisible(true)   -- <--- IMPORTANTE: volver invisible cada ciclo
-
-        -- ========== PROCESO CLEAR ==========
-        spam(clear, 14, 0.4)          -- invisible
-        setInvisible(false)            -- visible
-        spam(clear, 9, 0.1)           -- visible
-        task.wait(1)                  -- espera para prompts
-
-        -- Activar Laundry
-        local now = tick()
-        if isCharacterVisible() and now - lastLaundryAuto >= promptCooldown then
-            if firePrompt("Laundry Dirty Money") then
-                lastLaundryAuto = now
-            end
-        end
-
-        -- Ráfaga de compras
-        for i = 1, 3 do firePrompt("Buy Fake Watch"); task.wait(0.7) end
-        task.wait(1)
-        for i = 1, 3 do firePrompt("Buy Fake Designer Bag"); task.wait(0.7) end
-        task.wait(1)
-        for i = 1, 4 do firePrompt("Buy Sarsaparilla"); task.wait(0.7) end
-
-        -- ========== VOLVER A SER INVISIBLE ANTES DE SELL ==========
-        setInvisible(true)   -- <--- NUEVO: te vuelves invisible
-
-        -- ========== PROCESO SELL ==========
-        spam(sell, 9, 0.4)            -- invisible
-        setInvisible(false)            -- visible
-        spam(sell, 19, 0.1)           -- visible
-        task.wait(0.6)
-
-        now = tick()
-        if isCharacterVisible() and now - lastSellAuto >= promptCooldown then
-            if firePrompt("Sell All Smuggle") then
-                lastSellAuto = now
-            end
-        end
-
-        -- Pequeña pausa antes de repetir (opcional)
-        task.wait(0.5)
-        
-        -- Al terminar el ciclo, NO es necesario volver a invisible porque al inicio del próximo ciclo ya lo hará
-    end
-end)sextLabel.Text == "Auto Grab Materiales" then
+                if holder and holder:FindFirstChild("TextLabel") and holder.TextLabel.Text == "Auto Grab Materiales" then
                     local circle = v:FindFirstChild("Frame")
                     if circle then
                         circle.Position = UDim2.new(0,2,0.5,-10)
@@ -865,8 +818,53 @@ end)sextLabel.Text == "Auto Grab Materiales" then
     enableFloat()
     enableNoclip()
 
-    -- Bucle infinito
-    
+    -- Bucle infinito (VERSIÓN CORREGIDA, SIN ERRORES)
+    autoFarmLoopTask = task.spawn(function()
+        while autoFarmActive do
+            -- ========== ASEGURAR INVISIBILIDAD AL INICIO DEL CICLO ==========
+            setInvisible(true)
+
+            -- ========== PROCESO CLEAR ==========
+            spam(clear, 14, 0.4)          -- invisible
+            setInvisible(false)            -- visible
+            spam(clear, 9, 0.1)           -- visible
+            task.wait(1)                  -- espera para prompts
+
+            -- Activar Laundry Dirty Money
+            local now = tick()
+            if isCharacterVisible() and now - lastLaundryAuto >= promptCooldown then
+                if firePrompt("Laundry Dirty Money") then
+                    lastLaundryAuto = now
+                end
+            end
+
+            -- Ráfaga de compras
+            for i = 1, 3 do firePrompt("Buy Fake Watch"); task.wait(0.7) end
+            task.wait(1)
+            for i = 1, 3 do firePrompt("Buy Fake Designer Bag"); task.wait(0.7) end
+            task.wait(1)
+            for i = 1, 4 do firePrompt("Buy Sarsaparilla"); task.wait(0.7) end
+
+            -- ========== VOLVER A SER INVISIBLE ANTES DE SELL ==========
+            setInvisible(true)
+
+            -- ========== PROCESO SELL ==========
+            spam(sell, 9, 0.4)            -- invisible
+            setInvisible(false)            -- visible
+            spam(sell, 19, 0.1)           -- visible
+            task.wait(0.6)
+
+            now = tick()
+            if isCharacterVisible() and now - lastSellAuto >= promptCooldown then
+                if firePrompt("Sell All Smuggle") then
+                    lastSellAuto = now
+                end
+            end
+
+            task.wait(0.5)   -- pequeña pausa antes de repetir
+        end
+    end)
+end
 
 -- Función para detener el Auto Farm y restaurar todo
 local function stopAutoFarm()
@@ -934,7 +932,7 @@ local function stopAutoFarm()
     showNotification("❌ Auto Farm desactivado", 1)
 end
 
--- Vincular el toggle "Auto Farm" en la pestaña Main (corregida posición)
+-- Vincular el toggle "Auto Farm" en la pestaña Main
 local function fixMainToggles()
     for _, v in pairs(mainPage:GetDescendants()) do
         if v:IsA("Frame") and v.Parent and v.Parent:IsA("Frame") then
@@ -972,7 +970,7 @@ end
 
 fixMainToggles()
 
--- Toggle "Auto Farm" adicional (con posición corregida)
+-- Toggle "Auto Farm" adicional
 local autoFarmToggle = CreateToggle(mainPage, "Auto Farm", UDim2.new(0.05,0,0.05,0), function(v)
     _G.AutoFarm = v
     if v then
@@ -982,7 +980,7 @@ local autoFarmToggle = CreateToggle(mainPage, "Auto Farm", UDim2.new(0.05,0,0.05
     end
 end)
 
--- Imágenes decorativas (ajustadas a 150x150 y posición Y = 160)
+-- Imágenes decorativas
 local imgSize = 150
 local imgSpacing = 20
 local totalWidth = imgSize * 2 + imgSpacing
@@ -1001,8 +999,6 @@ img2.Position = UDim2.new(0, startX + imgSize + imgSpacing, 0, 160)
 img2.BackgroundTransparency = 1
 img2.Image = "rbxassetid://92537293278112"
 img2.ScaleType = Enum.ScaleType.Fit
-
--- No fijamos CanvasSize, se ajustará automáticamente
 
 -- FPS Boost
 CreateToggle(visualPage, "FPS Boost", UDim2.new(0.05,0,0.05,0), function(v)

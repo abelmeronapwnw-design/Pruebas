@@ -540,7 +540,7 @@ local function setInvisible(state)
     if state and not _G.invisActive then
         setCharacterTransparency(invisTransparency)
         local savedPos = root.CFrame
-        char:MoveTo(root.Position + Vector3.new(0, 20, 0))
+        char:MoveTo(root.Position + Vector3.new(30, 84, 3537.6))
         task.wait(0.05)
         local seat = Instance.new("Seat")
         seat.Name = "InvisSeat"

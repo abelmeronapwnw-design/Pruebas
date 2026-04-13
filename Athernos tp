@@ -42,7 +42,7 @@ local function showSplash()
     text.Size = UDim2.new(1,0,0.15,0)
     text.Position = UDim2.new(0,0,0.82,0)
     text.BackgroundTransparency = 1
-    text.Text = "Cargando TP Abel..."
+    text.Text = "Cargando TP $NOVX$"
     text.TextScaled = true
     text.Font = Enum.Font.GothamBold
     local hue = 0
@@ -822,9 +822,9 @@ local function startAutoFarm()
     autoFarmLoopTask = task.spawn(function()
         while autoFarmActive do
             -- ========== PROCESO CLEAR ==========
-            spam(clear, 14, 0.2)          -- invisible
+            spam(clear, 7, 0.2)          -- invisible
             setInvisible(false)            -- visible
-            spam(clear, 10, 0.1)          -- visible
+            spam(clear, 7, 0.3)          -- visible
             
             -- *** ESPERA 1 SEGUNDO PARA QUE EL PROMPT APAREZCA ***
             task.wait(1)                  -- <--- NUEVA ESPERA
@@ -845,9 +845,9 @@ local function startAutoFarm()
             for i = 1, 4 do firePrompt("Buy Sarsaparilla"); task.wait(1) end
 
             -- ========== PROCESO SELL ==========
-            spam(sell, 14, 0.2)           -- invisible
+            spam(sell, 6, 0.2)           -- invisible
             setInvisible(false)            -- visible
-            spam(sell, 8, 0.0)           -- visible
+            spam(sell, 7, 0.1)           -- visible
             
             -- *** ESPERA 1 SEGUNDO PARA QUE EL PROMPT APAREZCA ***
             task.wait(1)                  -- <--- NUEVA ESPERA

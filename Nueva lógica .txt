@@ -518,7 +518,7 @@ local function getPromptPosition(name)
 end
 
 local currentSeat = nil
-local invisTransparency = 0.7
+local invisTransparency = 1z
 
 local function setCharacterTransparency(trans)
     local char = Player.Character
@@ -540,7 +540,7 @@ local function setInvisible(state)
     if state and not _G.invisActive then
         setCharacterTransparency(invisTransparency)
         local savedPos = root.CFrame
-        char:MoveTo(root.Position + Vector3.new(0, 20, 0))
+        char:MoveTo(root.Position + Vector3.new(-25.9, 84.0, 3537.6))
         task.wait(0.05)
         local seat = Instance.new("Seat")
         seat.Name = "InvisSeat"
@@ -854,7 +854,7 @@ local function startAutoFarm()
             enableFloat()
 
             -- ========== PROCESO SELL ==========
-            spam(sell, 2, 1)           -- invisible
+            spam(sell, 3, 1)           -- invisible
             setInvisible(false)        -- visible
             spam(sell, 9, 0.1)         -- visible
 
@@ -990,7 +990,7 @@ local autoFarmToggle = CreateToggle(mainPage, "Auto Farm", UDim2.new(0.05,0,0.05
 end)
 
 -- Imágenes decorativas
-local imgSize = 150
+local imgSize = 200
 local imgSpacing = 20
 local totalWidth = imgSize * 2 + imgSpacing
 local startX = (420 - totalWidth) / 2

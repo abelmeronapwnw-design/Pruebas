@@ -36,13 +36,13 @@ local function showSplash()
     local image = Instance.new("ImageLabel", container)
     image.Size = UDim2.new(1,0,0.8,0)
     image.BackgroundTransparency = 1
-    image.Image = "rbxassetid://136236925617098"
+    image.Image = "rbxassetid://87964594320758"
     image.ScaleType = Enum.ScaleType.Fit
     local text = Instance.new("TextLabel", container)
     text.Size = UDim2.new(1,0,0.15,0)
     text.Position = UDim2.new(0,0,0.82,0)
     text.BackgroundTransparency = 1
-    text.Text = "Cargando $SEXHUB$"
+    text.Text = "Cargando ELVERGUEABUELITAS3000"
     text.TextScaled = true
     text.Font = Enum.Font.GothamBold
     local hue = 0

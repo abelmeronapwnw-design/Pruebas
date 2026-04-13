@@ -735,8 +735,7 @@ local function disableNoclip()
         end
     end
 end
-
---// TP ABEL - PARTE 3/3: AUTO FARM (CORREGIDO, SIN ROMPER INTERFAZ)
+--// TP ABEL - PARTE 3/3: AUTO FARM (CON DESACTIVACIÓN DE FLOTAR TRAS SPAMS VISIBLES)
 local autoFarmActive = false
 local autoFarmLoopTask = nil
 local originalSellState = false
@@ -744,7 +743,7 @@ local originalLaundryState = false
 local originalGrabState = false
 local autoFarmToggleFrame = nil
 
--- Cooldowns (5 segundos)
+-- Cooldowns (0.5 segundos)
 local lastLaundryAuto = 0
 local lastSellAuto = 0
 local promptCooldown = 0.5
@@ -813,22 +812,28 @@ local function startAutoFarm()
         task.wait(1)
     end
 
-    -- Activar modo fantasma
+    -- Activar modo fantasma (invisible + flotar + noclip)
     setInvisible(true)
     enableFloat()
     enableNoclip()
 
-    -- Bucle infinito (corregido)
+    -- Bucle infinito (con desactivación de flotar tras spams visibles)
     autoFarmLoopTask = task.spawn(function()
         while autoFarmActive do
-            -- ========== ASEGURAR INVISIBILIDAD AL INICIO DEL CICLO ==========
+            -- ========== ASEGURAR INVISIBILIDAD Y FLOTAR AL INICIO DEL CICLO ==========
             setInvisible(true)
+            enableFloat()   -- <--- Asegurar flotar activo antes de spams invisibles
 
             -- ========== PROCESO CLEAR ==========
             spam(clear, 3, 1)          -- invisible
-            setInvisible(false)            -- visible
-            spam(clear, 9, 0.1)           -- visible
-            task.wait(1)                  -- espera para prompts
+            setInvisible(false)        -- visible
+            spam(clear, 9, 0.1)        -- visible
+            
+            -- *** DESACTIVAR FLOTAR TRAS SPAMS VISIBLES ***
+            disableFloat()
+
+            -- Esperar para prompts
+            task.wait(1)
 
             -- Activar Laundry Dirty Money
             local now = tick()
@@ -845,13 +850,18 @@ local function startAutoFarm()
             task.wait(1)
             for i = 1, 4 do firePrompt("Buy Sarsaparilla"); task.wait(0.7) end
 
-            -- ========== VOLVER A SER INVISIBLE ANTES DE SELL ==========
-            setInvisible(true)
-
             -- ========== PROCESO SELL ==========
-            spam(sell, 3, 1)            -- invisible
-            setInvisible(false)            -- visible
-            spam(sell, 9, 0.1)           -- visible
+            -- Volver a invisible y reactivar flotar antes de spams invisibles
+            setInvisible(true)
+            enableFloat()   -- <--- Reactivar flotar
+
+            spam(sell, 3, 1)           -- invisible
+            setInvisible(false)        -- visible
+            spam(sell, 9, 0.1)         -- visible
+
+            -- *** DESACTIVAR FLOTAR TRAS SPAMS VISIBLES ***
+            disableFloat()
+
             task.wait(0.6)
 
             now = tick()
@@ -861,7 +871,7 @@ local function startAutoFarm()
                 end
             end
 
-            task.wait(0.5)   -- pequeña pausa antes de repetir
+            task.wait(0.5)   -- pequeña pausa antes de repetir el ciclo
         end
     end)
 end
@@ -932,7 +942,7 @@ local function stopAutoFarm()
     showNotification("❌ Auto Farm desactivado", 1)
 end
 
--- Vincular el toggle "Auto Farm" en la pestaña Main (corregida posición)
+-- Vincular el toggle "Auto Farm" en la pestaña Main
 local function fixMainToggles()
     for _, v in pairs(mainPage:GetDescendants()) do
         if v:IsA("Frame") and v.Parent and v.Parent:IsA("Frame") then
@@ -970,7 +980,7 @@ end
 
 fixMainToggles()
 
--- Toggle "Auto Farm" adicional (con posición corregida)
+-- Toggle "Auto Farm" adicional
 local autoFarmToggle = CreateToggle(mainPage, "Auto Farm", UDim2.new(0.05,0,0.05,0), function(v)
     _G.AutoFarm = v
     if v then
@@ -1022,4 +1032,4 @@ CreateToggle(visualPage, "FPS Boost", UDim2.new(0.05,0,0.05,0), function(v)
     end
 end)
 
-print("✅ TP Abel - Auto Farm definitivo cargado (con espera de 1s antes de prompts).")
+print("✅ TP Abel - Auto Farm definitivo cargado (flotar se desactiva tras spams visibles).")

@@ -1,4 +1,4 @@
---// TP ABEL - PARTE 1/3: GUI, NOTIFICACIONES, TOGGLES (INTERFAZ CORREGIDA)
+w--// TP ABEL - PARTE 1/3: GUI, NOTIFICACIONES, TOGGLES (INTERFAZ CORREGIDA)
 local Players = game:GetService("Players")
 local UIS = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -990,14 +990,14 @@ local img1 = Instance.new("ImageLabel", mainPage)
 img1.Size = UDim2.new(0, imgSize, 0, imgSize)
 img1.Position = UDim2.new(0, startX, 0, 160)
 img1.BackgroundTransparency = 1
-img1.Image = "rbxassetid://77035626799543"
+img1.Image = "rbxassetid://124881215845570s"
 img1.ScaleType = Enum.ScaleType.Fit
 
 local img2 = Instance.new("ImageLabel", mainPage)
 img2.Size = UDim2.new(0, imgSize, 0, imgSize)
 img2.Position = UDim2.new(0, startX + imgSize + imgSpacing, 0, 160)
 img2.BackgroundTransparency = 1
-img2.Image = "rbxassetid://92537293278112"
+img2.Image = "rbxassetid://99211208997991"
 img2.ScaleType = Enum.ScaleType.Fit
 
 -- No fijamos CanvasSize, se ajustará automáticamente

@@ -1,3 +1,4 @@
+--// TP ABEL - PARTE 1/3 (SIN SCROLL)
 local Players = game:GetService("Players")
 local UIS = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -204,9 +205,9 @@ local function CreatePage(name)
     f.Position = UDim2.new(0,0,0,100)
     f.BackgroundTransparency = 1
     f.Visible = false
-    f.ScrollBarThickness = 6
+    f.ScrollBarThickness = 0  -- Sin barra de scroll
     f.CanvasSize = UDim2.new(0,0,0,0)
-    f.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    f.AutomaticCanvasSize = Enum.AutomaticSize.None
     f.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Right
     Pages[name] = f
     return f
@@ -734,7 +735,8 @@ local function disableNoclip()
     end
 end
 
-print("[PARTE 2/3] Funciones de prompts, invisibilidad, teletransportes, flotar y noclip cargadas.")--// TP ABEL - PARTE 3/3: AUTO FARM (DESACTIVA FLOTAR TRAS SPAMS VISIBLES)
+print("[PARTE 2/3] Funciones de prompts, invisibilidad, teletransportes, flotar y noclip cargadas.")
+--// TP ABEL - PARTE 3/3: AUTO FARM (DESACTIVA FLOTAR TRAS SPAMS VISIBLES)
 local autoFarmActive = false
 local autoFarmLoopTask = nil
 local originalSellState = false
@@ -940,7 +942,7 @@ local function stopAutoFarm()
     showNotification("❌ Auto Farm desactivado", 1)
 end
 
--- Vincular el toggle "Auto Farm" en Main
+-- Vincular el toggle "Auto Farm" en Main (posición ajustada)
 local function fixMainToggles()
     for _, v in pairs(mainPage:GetDescendants()) do
         if v:IsA("Frame") and v.Parent and v.Parent:IsA("Frame") then
@@ -978,7 +980,7 @@ end
 
 fixMainToggles()
 
--- Toggle "Auto Farm" adicional
+-- Toggle "Auto Farm" adicional (posición más arriba para evitar scroll)
 local autoFarmToggle = CreateToggle(mainPage, "Auto Farm", UDim2.new(0.05,0,0.05,0), function(v)
     _G.AutoFarm = v
     if v then
@@ -988,22 +990,22 @@ local autoFarmToggle = CreateToggle(mainPage, "Auto Farm", UDim2.new(0.05,0,0.05
     end
 end)
 
--- Imágenes decorativas
-local imgSize = 200
+-- Imágenes decorativas (tamaño 150x150, posición ajustada)
+local imgSize = 150
 local imgSpacing = 20
 local totalWidth = imgSize * 2 + imgSpacing
 local startX = (420 - totalWidth) / 2
 
 local img1 = Instance.new("ImageLabel", mainPage)
 img1.Size = UDim2.new(0, imgSize, 0, imgSize)
-img1.Position = UDim2.new(0, startX, 0, 160)
+img1.Position = UDim2.new(0, startX, 0, 140)
 img1.BackgroundTransparency = 1
 img1.Image = "rbxassetid://112127474491332"
 img1.ScaleType = Enum.ScaleType.Fit
 
 local img2 = Instance.new("ImageLabel", mainPage)
 img2.Size = UDim2.new(0, imgSize, 0, imgSize)
-img2.Position = UDim2.new(0, startX + imgSize + imgSpacing, 0, 160)
+img2.Position = UDim2.new(0, startX + imgSize + imgSpacing, 0, 140)
 img2.BackgroundTransparency = 1
 img2.Image = "rbxassetid://92537293278112"
 img2.ScaleType = Enum.ScaleType.Fit
@@ -1028,4 +1030,4 @@ CreateToggle(visualPage, "FPS Boost", UDim2.new(0.05,0,0.05,0), function(v)
     end
 end)
 
-print("✅ TP Abel - Auto Farm definitivo cargado (flotar se desactiva tras spams visibles).")
+print("✅ TP Abel - Auto Farm definitivo cargado (flotar se desactiva tras spams visibles, sin scroll).")

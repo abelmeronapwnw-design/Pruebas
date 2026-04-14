@@ -1,4 +1,3 @@
---// TP ABEL - PARTE 1/3 (SIN SCROLL)
 local Players = game:GetService("Players")
 local UIS = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")

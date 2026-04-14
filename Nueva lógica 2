@@ -4,7 +4,8 @@ local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local CoreGui = game:GetService("CoreGui")
 local Stats = game:GetService("Stats")
-local Lighting = game:GetService("Lighting")s
+local Lighting = game:GetService("Lighting")
+
 local Player = Players.LocalPlayer
 
 -- Variables globales

@@ -1,12 +1,10 @@
---// TP ABEL - PARTE 1/3
 local Players = game:GetService("Players")
 local UIS = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local CoreGui = game:GetService("CoreGui")
 local Stats = game:GetService("Stats")
-local Lighting = game:GetService("Lighting")
-
+local Lighting = game:GetService("Lighting")s
 local Player = Players.LocalPlayer
 
 -- Variables globales

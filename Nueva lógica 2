@@ -1028,4 +1028,4 @@ CreateToggle(visualPage, "FPS Boost", UDim2.new(0.05,0,0.05,0), function(v)
     end
 end)
 
-print("✅ TP Abel - Auto Farm definitivo cargado (flotar se desactiva tras spams visibles).")s
+print("✅ TP Abel - Auto Farm definitivo cargado (flotar se desactiva tras spams visibles).")

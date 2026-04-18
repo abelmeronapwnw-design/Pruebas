@@ -596,7 +596,7 @@ sound.Parent = workspace
 local function playSound() pcall(function() sound:Play() end) end
 
 -- Coordenadas actualizadas
-local sell = Vector3.new(3507.4, 6.5, -736.9)
+local sell = Vector3.new(3507.4, 10, -736.9)
 local clear = Vector3.new(-1843.3, 24, -4.1)
 
 -- WalkSpeed loop
@@ -625,7 +625,7 @@ task.spawn(function()
         end
         if _G.AutoLaundry and now - lastLaundryTime >= laundryCooldown then
             if firePrompt("Laundry Dirty Money") then
-                lastLaundryTime = now
+                lastsLaundryTime = now
             end
         end
         task.wait(0.2)
@@ -825,9 +825,9 @@ local function startAutoFarm()
             enableFloat()
 
             -- ========== PROCESO CLEAR ==========
-            spam(clear, 2, 1)          -- invisible
+            spam(clear, 4, 1)          -- invisible
             setInvisible(false)        -- visible
-            spam(clear, 9, 0.1)        -- visible
+            spam(clear, 9, 0.3)        -- visible
 
             -- Desactivar flotar tras spams visibles
             disableFloat()
@@ -854,9 +854,9 @@ local function startAutoFarm()
             enableFloat()
 
             -- ========== PROCESO SELL ==========
-            spam(sell, 3, 1)           -- invisible
+            spam(sell, 4, 1)           -- invisible
             setInvisible(false)        -- visible
-            spam(sell, 9, 0.1)         -- visible
+            spam(sell, 9, 0.3)         -- visible
 
             -- Desactivar flotar tras spams visibles
             disableFloat()
